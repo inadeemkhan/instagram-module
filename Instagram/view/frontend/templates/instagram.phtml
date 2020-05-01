@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    require([
+        'jquery',
+        'prototype'
+        ], function($){
+        $( document ).ready(function() {
+            var redirectUrl = location.href;
+            var position = redirectUrl.indexOf("=");   
+            
+            // To get Access Token From Window URL.
+            var tokenValue = redirectUrl.substring(position+1, redirectUrl.length);
+
+            // To get UserId From Access Token.
+            var firstDotPosition = tokenValue.split(".");
+
+            // To set the values on admin config.
+            window.opener.document.getElementById('instagramSection_setting_access_Token').value = tokenValue;
+            window.opener.document.getElementById('instagramSection_setting_user_id').value = firstDotPosition['0'];
+
+            // To close popup window.
+            setTimeout(function () { 
+                window.close();
+            }, 3000);
+        });
+    });
+</script>
